@@ -18,4 +18,3 @@ vscode:
     - oderwat.indent-rainbow # Highlight indentation level
     - streetsidesoftware.code-spell-checker # Spelling checker for source code
     - charliermarsh.ruff # Code linter Ruff
-
