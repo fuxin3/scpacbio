@@ -86,10 +86,40 @@ workflow SCPACBIO {
         ch_multiqc_logo.toList()
     )
 
+    //
+    // MODULE: REMOVE_PRIMER
+    //
+
+    //
+    // MODULE: DETECT_PATTERN
+    //
+
+    //
+    // MODULE: FILTER_POLYA
+    //
+
+    //
+    // MODULE: SPLIT_LINKER
+    //
+
+    //
+    // MODULE: DEDUP
+    //
+
+    //
+    // MODULE: COLLAPSE_ISOFORM
+    //
+
+    //
+    // MODULE: GENERATE_MATRIX
+    //
+
+
     emit:
     multiqc_report = MULTIQC.out.report.toList() // channel: /path/to/multiqc_report.html
     versions       = ch_versions                 // channel: [ path(versions.yml) ]
 }
+
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
