@@ -14,6 +14,11 @@
                         "branch": "master",
                         "git_sha": "b7ebe95761cd389603f9cc0e0dc384c0f663815a",
                         "installed_by": ["modules"]
+                    },
+                    "remove_primer": {
+                        "branch": "master",
+                        "git_sha": "",
+                        "installed_by": ["modules"]
                     }
                 }
             },
