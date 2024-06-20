@@ -1,0 +1,7 @@
+name: remove_primer
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - bioconda::lima=2.6.0

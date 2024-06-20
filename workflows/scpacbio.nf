@@ -11,6 +11,8 @@ include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pi
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_scpacbio_pipeline'
 
+include { REMOVE_PRIMER          } from '../modules/nf-core/remove_primer/main'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -89,7 +91,9 @@ workflow SCPACBIO {
     //
     // MODULE: REMOVE_PRIMER
     //
-
+    REMOVE_PRIMER (
+        ch_samplesheet
+    )
     //
     // MODULE: DETECT_PATTERN
     //
