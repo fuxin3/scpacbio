@@ -13,19 +13,7 @@ process REMOVE_PRIMER {
     output:
     tuple val(meta), path("*.counts") , emit: counts
     tuple val(meta), path("*.report") , emit: report
-    tuple val(meta), path("*.summary"), emit: summary
     path "versions.yml"               , emit: versions
-
-    tuple val(meta), path("*.bam")              , optional: true, emit: bam
-    tuple val(meta), path("*.bam.pbi")          , optional: true, emit: pbi
-    tuple val(meta), path("*.{fa, fasta}")      , optional: true, emit: fasta
-    tuple val(meta), path("*.{fa.gz, fasta.gz}"), optional: true, emit: fastagz
-    tuple val(meta), path("*.fastq")            , optional: true, emit: fastq
-    tuple val(meta), path("*.fastq.gz")         , optional: true, emit: fastqgz
-    tuple val(meta), path("*.xml")              , optional: true, emit: xml
-    tuple val(meta), path("*.json")             , optional: true, emit: json
-    tuple val(meta), path("*.clips")            , optional: true, emit: clips
-    tuple val(meta), path("*.guess")            , optional: true, emit: guess
 
     when:
     task.ext.when == null || task.ext.when
