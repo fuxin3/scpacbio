@@ -92,9 +92,9 @@ workflow SCPACBIO {
     //
     // MODULE: REMOVE_PRIMER
     //
-    REMOVE_PRIMER (
-        ch_samplesheet
-    )
+    //REMOVE_PRIMER (
+    //   ch_samplesheet
+    //)
 
     LIMA (
         ch_samplesheet
