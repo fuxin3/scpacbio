@@ -12,7 +12,7 @@ process REMOVE_PRIMER {
 
     output:
     tuple val(meta), path("*.bam"), emit: bam
-    tuple val(meta), path("*.summary"), emit: summary
+    tuple val(meta), path("*.summary")
 
     when:
     task.ext.when == null || task.ext.when
@@ -35,7 +35,7 @@ process REMOVE_PRIMER {
         [ -f "\${new_name}" ] || ln -s \$old_name \$new_name
     done
 
-     lima --isoseq --dump-clip \\
+    lima --isoseq --dump-clip \\
         $args \\
         --threads $task.cpus \\
         $primer_fastq \\
