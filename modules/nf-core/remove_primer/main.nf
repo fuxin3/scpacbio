@@ -12,7 +12,6 @@ process REMOVE_PRIMER {
 
     output:
     tuple val(meta), path("*.bam"), emit: bam
-    tuple val(meta), path("*.summary") , emit: summary
     path  "remove.primers.lima.summary" , emit: summary
 
     when:
