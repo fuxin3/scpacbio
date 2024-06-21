@@ -8,7 +8,7 @@ process LIMA {
         'biocontainers/lima:2.9.0--h9ee0642_1' }"
 
     input:
-    tuple val(meta), path(ccs)
+    tuple val(meta), path(reads)
     path primers
 
     output:
