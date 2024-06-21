@@ -12,7 +12,7 @@ process REMOVE_PRIMER {
 
     output:
     tuple val(meta), path("*.bam"), emit: bam
-    path  "remove.primers.lima.summary" , emit: summary
+    tuple val(meta), path("*.summary"), emit: summary
 
     when:
     task.ext.when == null || task.ext.when
