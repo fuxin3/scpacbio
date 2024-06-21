@@ -12,6 +12,7 @@ include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pi
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_scpacbio_pipeline'
 
 include { REMOVE_PRIMER          } from '../modules/nf-core/remove_primer/main'
+include { LIMA                   } from '../modules/nf-core/lima/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,6 +93,10 @@ workflow SCPACBIO {
     // MODULE: REMOVE_PRIMER
     //
     REMOVE_PRIMER (
+        ch_samplesheet
+    )
+
+    LIMA (
         ch_samplesheet
     )
     //
