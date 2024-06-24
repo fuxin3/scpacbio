@@ -17,12 +17,12 @@
                     },
                     "remove_primer": {
                         "branch": "master",
-                        "git_sha": "",
+                        "git_sha": "ac5e74fda0c783d19c92017700770b1a877b2a77",
                         "installed_by": ["modules"]
                     },
                     "lima": {
                         "branch": "master",
-                        "git_sha": "",
+                        "git_sha": "30070fc564e303ce742fc1abb9aef662f6e281ff",
                         "installed_by": ["modules"]
                     }
                 },
