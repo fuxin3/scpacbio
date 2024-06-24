@@ -96,10 +96,10 @@ workflow SCPACBIO {
     //    ch_samplesheet
     //)
 
-    //LIMA (
-    //    ch_samplesheet
-    //    primer = Channel.fromPath(params.primer_fasta_file)
-    //)
+    LIMA (
+        ch_samplesheet
+        primer = Channel.fromPath(params.primer_fasta_file)
+    )
     //
     // MODULE: DETECT_PATTERN
     //
