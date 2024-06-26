@@ -24,6 +24,18 @@
                         "branch": "master",
                         "git_sha": "30070fc564e303ce742fc1abb9aef662f6e281ff",
                         "installed_by": ["modules"]
+                    },
+                    "isoseq3": {
+                        "tag": {
+                            "branch": "master",
+                            "git_sha": "293accfc5449dc514d90bbbbf3e068905cd27e29",
+                            "installed_by": ["modules"]
+                        },
+                        "dedup": {
+                            "branch": "master",
+                            "git_sha": "",
+                            "installed_by": ["modules"]
+                        }
                     }
                 },
                 "subworkflows": {
@@ -42,6 +54,32 @@
                             "branch": "master",
                             "git_sha": "5caf7640a9ef1d18d765d55339be751bb0969dfa",
                             "installed_by": ["subworkflows"]
+                        }
+                    }
+                }
+            }
+        },
+        "https://github.com/nf-core/isoseq.git": {
+            "modules": {
+                "nf-core": {
+                    "isoseq3": {
+                        "refine": {
+                            "branch": "master",
+                            "git_sha": "6f214c17f0586886f941f78c340ae210cde62eb3",
+                            "installed_by": ["modules"]
+                        }
+                    }
+                }
+            }
+        },
+        "https://github.com:fuxin3/scpacbio.git": {
+            "modules": {
+                "nf-core": {
+                    "isoseq3": {
+                        "dedup": {
+                            "branch": "master",
+                            "git_sha": "",
+                            "installed_by": ["modules"]
                         }
                     }
                 }
