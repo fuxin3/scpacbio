@@ -104,6 +104,9 @@ workflow SCPACBIO {
 
     //
     // MODULE: DETECT_PATTERN
+    //ISOSEQ3_TAG(
+
+    //)
     //
 
     //
