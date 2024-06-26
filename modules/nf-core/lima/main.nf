@@ -34,29 +34,29 @@ process LIMA {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    if( "$ccs" == "${prefix}.bam" )      error "Input and output names are the same, set prefix in module configuration"
-    if( "$ccs" == "${prefix}.fasta" )    error "Input and output names are the same, set prefix in module configuration"
-    if( "$ccs" == "${prefix}.fasta.gz" ) error "Input and output names are the same, set prefix in module configuration"
-    if( "$ccs" == "${prefix}.fastq" )    error "Input and output names are the same, set prefix in module configuration"
-    if( "$ccs" == "${prefix}.fastq.gz" ) error "Input and output names are the same, set prefix in module configuration"
+    if( "$reads" == "${prefix}.bam" )      error "Input and output names are the same, set prefix in module configuration"
+    if( "$reads" == "${prefix}.fasta" )    error "Input and output names are the same, set prefix in module configuration"
+    if( "$reads" == "${prefix}.fasta.gz" ) error "Input and output names are the same, set prefix in module configuration"
+    if( "$reads" == "${prefix}.fastq" )    error "Input and output names are the same, set prefix in module configuration"
+    if( "$reads" == "${prefix}.fastq.gz" ) error "Input and output names are the same, set prefix in module configuration"
 
     """
     OUT_EXT=""
 
-    if [[ $ccs =~ bam\$ ]]; then
+    if [[ $reads =~ bam\$ ]]; then
         OUT_EXT="bam"
-    elif [[ $ccs =~ fasta\$ ]]; then
+    elif [[ $reads =~ fasta\$ ]]; then
         OUT_EXT="fasta"
-    elif [[ $ccs =~ fasta.gz\$ ]]; then
+    elif [[ $reads =~ fasta.gz\$ ]]; then
         OUT_EXT="fasta.gz"
-    elif [[ $ccs =~ fastq\$ ]]; then
+    elif [[ $reads =~ fastq\$ ]]; then
         OUT_EXT="fastq"
-    elif [[ $ccs =~ fastq.gz\$ ]]; then
+    elif [[ $reads =~ fastq.gz\$ ]]; then
         OUT_EXT="fastq.gz"
     fi
 
     lima \\
-        $ccs \\
+        $reads \\
         $primers \\
         $prefix.\$OUT_EXT \\
         -j $task.cpus \\
