@@ -15,6 +15,7 @@ process LIMA {
     tuple val(meta), path("*.counts") , emit: counts
     tuple val(meta), path("*.report") , emit: report
     tuple val(meta), path("*.summary"), emit: summary
+    tuple val(meta), path("*.5p--3p.bam"), emit: 5p3p_bam
     path "versions.yml"               , emit: versions
 
     tuple val(meta), path("*.bam")              , optional: true, emit: bam

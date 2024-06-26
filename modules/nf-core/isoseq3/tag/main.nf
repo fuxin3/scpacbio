@@ -8,7 +8,7 @@ process ISOSEQ3_TAG {
         'biocontainers/isoseq3:4.0.0--h9ee0642_0' }"
 
     input:
-    tuple val(meta), path(bam)
+    tuple val(meta), path(5p3p_bam)
     val design
 
     output:
