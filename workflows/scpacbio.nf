@@ -15,6 +15,7 @@ include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_scpa
 include { LIMA                     } from '../modules/nf-core/lima/main'
 include { ISOSEQ3_TAG              } from '../modules/nf-core/isoseq3/tag/main'
 include { ISOSEQ3_REFINE           } from '../modules/nf-core/isoseq3/refine/main'
+include { EXTRACT_BC               } from '../modules/local/extract_bc/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -123,7 +124,9 @@ workflow SCPACBIO {
     //
     // MODULE: SPLIT_LINKER
     //
-
+    EXTRACT_BC(
+        ISOSEQ3_REFINE.out.refine_bam
+    )
     //
     // MODULE: DEDUP
     //
