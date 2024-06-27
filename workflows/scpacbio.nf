@@ -89,7 +89,6 @@ workflow SCPACBIO {
         ch_multiqc_custom_config.toList(),
         ch_multiqc_logo.toList()
     )
-    ch_versions = ch_versions.mix(MULTIQC.out.versions.first())
     //
     // MODULE: REMOVE_PRIMER
     //
@@ -97,27 +96,17 @@ workflow SCPACBIO {
     //    ch_samplesheet
     //)
 
-    //LIMA (
-    //    ch_samplesheet,
-    //    primer = Channel.fromPath(params.primer_fasta_file)
-    //)
+    LIMA (
+        ch_samplesheet,
+        primer = Channel.fromPath(params.primer_fasta_file)
+    )
     //ch_versions = ch_versions.mix(LIMA.out.versions.first())
 
     //
     // MODULE: DETECT_PATTERN
 
-    Channel
-        .LIMA(
-            ch_samplesheet,
-            primer = Channel.fromPath(params.primer_fasta_file)
-        )
-        .map{
-            5p3p_bam -> return [[ 5p3p_bam:true ], [ 5p3p_bam ] ]
-        }
-        .set { ch_limaout }
-
     ISOSEQ3_TAG(
-        ch_limaout,
+        LIMA.out.5p3p_bam,
         design = params.design
     )
 
