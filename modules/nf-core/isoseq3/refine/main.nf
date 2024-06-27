@@ -12,7 +12,7 @@ process ISOSEQ3_REFINE {
     path primers
 
     output:
-    tuple val(meta), path("*.bam")                        , emit: bam
+    tuple val(meta), path("*.bam")                        , emit: refine_bam
     tuple val(meta), path("*.bam.pbi")                    , emit: pbi
     tuple val(meta), path("*.consensusreadset.xml")       , emit: consensusreadset
     tuple val(meta), path("*.filter_summary.report.json") , emit: summary

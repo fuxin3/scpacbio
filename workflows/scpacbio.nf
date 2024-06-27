@@ -11,9 +11,10 @@ include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pi
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { methodsDescriptionText } from '../subworkflows/local/utils_nfcore_scpacbio_pipeline'
 
-include { REMOVE_PRIMER          } from '../modules/nf-core/remove_primer/main'
-include { LIMA                   } from '../modules/nf-core/lima/main'
-//include { ISOSEQ3_TAG            } from '../modules/nf-core/isoseq3/tag/main'
+//include { REMOVE_PRIMER          } from '../modules/nf-core/remove_primer/main'
+include { LIMA                     } from '../modules/nf-core/lima/main'
+include { ISOSEQ3_TAG              } from '../modules/nf-core/isoseq3/tag/main'
+include { ISOSEQ3_REFINE           } from '../modules/nf-core/isoseq3/refine/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -98,26 +99,27 @@ workflow SCPACBIO {
 
     LIMA (
         ch_samplesheet,
-        primer = Channel.fromPath(params.primer_fasta_file)
+        primers = Channel.fromPath(params.primer_fasta_file)
     )
 
-    LIMA.out.5p3p_bam.view()
+    //LIMA.out.p53_bam.view()
     //ch_versions = ch_versions.mix(LIMA.out.versions.first())
 
     //
     // MODULE: DETECT_PATTERN
 
-    // ISOSEQ3_TAG(
-    //    LIMA.out.5p3p_bam,
-    //    design = params.design
-    //)
-
-    //
+    ISOSEQ3_TAG(
+        LIMA.out.p53_bam,
+        design = params.design
+    )
 
     //
     // MODULE: FILTER_POLYA
     //
-
+    ISOSEQ3_REFINE(
+        ISOSEQ3_TAG.out.tag_bam,
+        primers = Channel.fromPath(params.primer_fasta_file)
+    )
     //
     // MODULE: SPLIT_LINKER
     //

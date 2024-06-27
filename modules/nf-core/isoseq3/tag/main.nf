@@ -8,11 +8,11 @@ process ISOSEQ3_TAG {
         'biocontainers/isoseq3:4.0.0--h9ee0642_0' }"
 
     input:
-    tuple val(meta), path(5p3p_bam)
+    tuple val(meta), path(p53_bam)
     val design
 
     output:
-    tuple val(meta), path("*.flt.bam")                  , emit: bam
+    tuple val(meta), path("*.flt.bam")                  , emit: tag_bam
     tuple val(meta), path("*.flt.bam.pbi")              , emit: pbi
     path "versions.yml"                                 , emit: versions
 
@@ -29,7 +29,7 @@ process ISOSEQ3_TAG {
         tag \\
         -j $task.cpus \\
         --design $design \\
-        ${prefix}.5p--3p.bam \\
+        ${p53_bam} \\
         ${prefix}.flt.bam \\
         $args
 
