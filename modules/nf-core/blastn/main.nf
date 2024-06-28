@@ -9,10 +9,11 @@ process BLAST_BLASTN {
 
     input:
     tuple val(meta) , path(fasta)
-    tuple val(meta2), path(db)
+    //tuple val(meta2), path(db)
+    path db
 
     output:
-    tuple val(meta), path('*.txt'), emit: txt
+    tuple val(meta), path('*.white_list.txt'), emit: txt
     path "versions.yml"           , emit: versions
 
     when:
@@ -25,6 +26,8 @@ process BLAST_BLASTN {
     def fasta_name = is_compressed ? fasta.getBaseName() : fasta
 
     """
+    makeblastdb -in ${db} -input_type fasta -dbtype nucl
+
     if [ "${is_compressed}" == "true" ]; then
         gzip -c -d ${fasta} > ${fasta_name}
     fi
@@ -40,7 +43,7 @@ process BLAST_BLASTN {
         -db \$DB \\
         -query ${fasta_name} \\
         ${args} \\
-        -out ${prefix}.txt
+        -out ${prefix}.white_list.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -52,7 +55,7 @@ process BLAST_BLASTN {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.txt
+    touch ${prefix}.white_list.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

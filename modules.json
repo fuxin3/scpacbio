@@ -36,6 +36,11 @@
                             "git_sha": "",
                             "installed_by": ["modules"]
                         }
+                    },
+                    "blastn": {
+                        "branch": "master",
+                        "git_sha": "4262a04142431275e54e1f4b413628a2201ed6e6",
+                        "installed_by": ["modules"]
                     }
                 },
                 "subworkflows": {
@@ -81,6 +86,18 @@
                             "git_sha": "",
                             "installed_by": ["modules"]
                         }
+                    }
+                },
+                "local": {
+                    "extract_bc": {
+                        "branch": "master",
+                        "git_sha": "",
+                        "installed_by": ["modules"]
+                    },
+                    "parse_blastn": {
+                        "branch": "master",
+                        "git_sha": "",
+                        "installed_by": ["modules"]
                     }
                 }
             }

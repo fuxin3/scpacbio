@@ -16,6 +16,8 @@ include { LIMA                     } from '../modules/nf-core/lima/main'
 include { ISOSEQ3_TAG              } from '../modules/nf-core/isoseq3/tag/main'
 include { ISOSEQ3_REFINE           } from '../modules/nf-core/isoseq3/refine/main'
 include { EXTRACT_BC               } from '../modules/local/extract_bc/main'
+include { BLAST_BLASTN             } from '../modules/nf-core/blastn/main'
+include { PARSE_BLASTN             } from '../modules/local/parse_blastn/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -126,6 +128,15 @@ workflow SCPACBIO {
     //
     EXTRACT_BC(
         ISOSEQ3_REFINE.out.refine_bam
+    )
+
+    BLAST_BLASTN(
+        EXTRACT_BC.out.bc8_fa,
+        db = Channel.fromPath(params.bclist)
+    )
+    PARSE_BLASTN(
+        BLAST_BLASTN.out.txt,
+        bclist = Channel.fromPath(params.bclist)
     )
     //
     // MODULE: DEDUP
