@@ -41,6 +41,11 @@
                         "branch": "master",
                         "git_sha": "4262a04142431275e54e1f4b413628a2201ed6e6",
                         "installed_by": ["modules"]
+                    },
+                    "minimap2": {
+                        "branch": "master",
+                        "git_sha": "e83b347b3e674de6bb1bb7bdf9b2674768c8e0fe",
+                        "installed_by": ["modules"]
                     }
                 },
                 "subworkflows": {
@@ -85,6 +90,11 @@
                             "branch": "master",
                             "git_sha": "",
                             "installed_by": ["modules"]
+                        },
+                        "collapse": {
+                            "branch": "master",
+                            "git_sha": "",
+                            "installed_by": ["modules"]
                         }
                     }
                 },
@@ -95,6 +105,16 @@
                         "installed_by": ["modules"]
                     },
                     "parse_blastn": {
+                        "branch": "master",
+                        "git_sha": "",
+                        "installed_by": ["modules"]
+                    },
+                    "correct_bc": {
+                        "branch": "master",
+                        "git_sha": "",
+                        "installed_by": ["modules"]
+                    },
+                    "get_fasta": {
                         "branch": "master",
                         "git_sha": "",
                         "installed_by": ["modules"]

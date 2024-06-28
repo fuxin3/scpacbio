@@ -18,7 +18,11 @@ include { ISOSEQ3_REFINE           } from '../modules/nf-core/isoseq3/refine/mai
 include { EXTRACT_BC               } from '../modules/local/extract_bc/main'
 include { BLAST_BLASTN             } from '../modules/nf-core/blastn/main'
 include { PARSE_BLASTN             } from '../modules/local/parse_blastn/main'
-
+include { CORRECT_BC               } from '../modules/local/correct_bc/main'
+include { ISOSEQ3_DEDUP            } from '../modules/nf-core/isoseq3/dedup/main'
+include { GET_FASTA                } from '../modules/local/get_fasta/main'
+include { MINIMAP2_ALIGN           } from '../modules/nf-core/minimap2/main'
+include { ISOSEQ3_COLLAPSE         } from '../modules/nf-core/isoseq3/collapse/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -138,14 +142,29 @@ workflow SCPACBIO {
         BLAST_BLASTN.out.txt,
         bclist = Channel.fromPath(params.bclist)
     )
+    CORRECT_BC(
+        PARSE_BLASTN.out.txt,
+        ISOSEQ3_REFINE.out.refine_bam
+    )
     //
     // MODULE: DEDUP
     //
-
+    ISOSEQ3_DEDUP(
+        CORRECT_BC.out.correct_bam
+    )
+    GET_FASTA(
+        ISOSEQ3_DEDUP.out.dedup_bam
+    )
     //
     // MODULE: COLLAPSE_ISOFORM
     //
-
+    MINIMAP2_ALIGN(
+        GET_FASTA.out.dedup_fasta,
+        reference = Channel.fromPath(params.genome_fa)
+    )
+    ISOSEQ3_COLLAPSE(
+        MINIMAP2_ALIGN.out.sort_bam
+    )
     //
     // MODULE: GENERATE_MATRIX
     //

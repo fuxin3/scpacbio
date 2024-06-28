@@ -6,4 +6,4 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - "bioconda::isoseq3=4.0.0"
+  - "bioconda::isoseq3=3.8.2"

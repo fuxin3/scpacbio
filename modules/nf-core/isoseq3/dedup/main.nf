@@ -4,15 +4,16 @@ process ISOSEQ3_DEDUP {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/dedup:0.12.8--hdfd78af_1' :
-        'biocontainers/dedup:0.12.8--hdfd78af_1' }"
+        'https://depot.galaxyproject.org/singularity/isoseq3:3.8.2--h9ee0642_0' :
+        'biocontainers/isoseq3:3.8.2--h9ee0642_0' }"
+
 
     input:
     tuple val(meta), path(bam)
 
     output:
-    tuple val(meta), path("*.bam"), emit: bam     // _rmdup is hardcoded output from dedup
-   // tuple val(meta), path("*.json")     , emit: json
+    tuple val(meta), path("*.dedup.bam"), emit: dedup_bam     // _rmdup is hardcoded output from dedup
+    //tuple val(meta), path("*.dedup.fasta"), emit: dedup_fasta
     //tuple val(meta), path("*.hist")     , emit: hist
     //tuple val(meta), path("*log")       , emit: log
     path "versions.yml"                 , emit: versions
@@ -28,8 +29,8 @@ process ISOSEQ3_DEDUP {
     isoseq3 \\
         dedup \\
         -j $task.cpus \\
-        -i $bam \\
-        -o ${prefix}.dedup.bam \\
+        $bam \\
+        ${prefix}.dedup.bam \\
         $args
 
     cat <<-END_VERSIONS > versions.yml

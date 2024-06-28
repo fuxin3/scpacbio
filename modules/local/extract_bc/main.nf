@@ -6,7 +6,9 @@ process EXTRACT_BC {
     //container "biocontainers/python:3.12"
 
     conda "${moduleDir}/environment.yml"
-    conda 'bioconda::pysam==0.22.1'
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/pysam:0.22.1--py39hcada746_0' :
+        'biocontainers/pysam:0.22.1--py39hcada746_0' }"
 
     input:
     tuple val(meta), path(bam)
