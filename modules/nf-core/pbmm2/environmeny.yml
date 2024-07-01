@@ -1,0 +1,9 @@
+name: pbmm2
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - bioconda::pbmm2=1.14.99

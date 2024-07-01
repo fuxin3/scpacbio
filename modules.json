@@ -35,6 +35,11 @@
                             "branch": "master",
                             "git_sha": "",
                             "installed_by": ["modules"]
+                        },
+                        "collapse": {
+                            "branch": "master",
+                            "git_sha": "",
+                            "installed_by": ["modules"]
                         }
                     },
                     "blastn": {
@@ -45,6 +50,21 @@
                     "minimap2": {
                         "branch": "master",
                         "git_sha": "e83b347b3e674de6bb1bb7bdf9b2674768c8e0fe",
+                        "installed_by": ["modules"]
+                    },
+                    "pbmm2": {
+                        "branch": "master",
+                        "git_sha": "",
+                        "installed_by": ["modules"]
+                    },
+                    "pigeon": {
+                        "branch": "master",
+                        "git_sha": "",
+                        "installed_by": ["modules"]
+                    },
+                    "pbindex": {
+                        "branch": "master",
+                        "git_sha": "",
                         "installed_by": ["modules"]
                     }
                 },

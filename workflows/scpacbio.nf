@@ -19,10 +19,14 @@ include { EXTRACT_BC               } from '../modules/local/extract_bc/main'
 include { BLAST_BLASTN             } from '../modules/nf-core/blastn/main'
 include { PARSE_BLASTN             } from '../modules/local/parse_blastn/main'
 include { CORRECT_BC               } from '../modules/local/correct_bc/main'
+include { SAMTOOLS_BC              } from '../modules/nf-core/isoseq3/dedup/main'
 include { ISOSEQ3_DEDUP            } from '../modules/nf-core/isoseq3/dedup/main'
-include { GET_FASTA                } from '../modules/local/get_fasta/main'
-include { MINIMAP2_ALIGN           } from '../modules/nf-core/minimap2/main'
+include { PBMM2                    } from '../modules/nf-core/pbmm2/main'
+//include { GET_FASTA                } from '../modules/local/get_fasta/main'
+//include { MINIMAP2_ALIGN           } from '../modules/nf-core/minimap2/main'
 include { ISOSEQ3_COLLAPSE         } from '../modules/nf-core/isoseq3/collapse/main'
+include { PIGEON_SORT              } from '../modules/nf-core/pigeon/main'
+//include { PBINDEX                  } from '../modules/nf-core/pbindex/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -149,21 +153,24 @@ workflow SCPACBIO {
     //
     // MODULE: DEDUP
     //
-    ISOSEQ3_DEDUP(
+    SAMTOOLS_BC(
         CORRECT_BC.out.correct_bam
     )
-    GET_FASTA(
-        ISOSEQ3_DEDUP.out.dedup_bam
+    ISOSEQ3_DEDUP(
+        SAMTOOLS_BC.out.sort_bam
+    )
+    PBMM2(
+        ISOSEQ3_DEDUP.out.dedup_bam,
+        reference = Channel.fromPath(params.genome_fa)
     )
     //
     // MODULE: COLLAPSE_ISOFORM
     //
-    MINIMAP2_ALIGN(
-        GET_FASTA.out.dedup_fasta,
-        reference = Channel.fromPath(params.genome_fa)
-    )
     ISOSEQ3_COLLAPSE(
-        MINIMAP2_ALIGN.out.sort_bam
+        PBMM2.out.map_bam
+    )
+    PIGEON_SORT(
+        ISOSEQ3_COLLAPSE.out.gff
     )
     //
     // MODULE: GENERATE_MATRIX

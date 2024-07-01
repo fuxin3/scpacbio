@@ -1,0 +1,9 @@
+name: pigeon_sort
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - bioconda::pbpigeon=1.2.0

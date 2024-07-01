@@ -5,3 +5,4 @@ nf-core create --template-yaml template.yml
 
 #需要先安装pysam
 conda install bioconda::pysam
+conda install bioconda::samtools

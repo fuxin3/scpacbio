@@ -7,6 +7,7 @@ process MINIMAP2_ALIGN {
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:3161f532a5ea6f1dec9be5667c9efc2afdac6104-0' :
         'biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:3161f532a5ea6f1dec9be5667c9efc2afdac6104-0' }"
+    
 
     input:
     tuple val(meta), path(fa)
@@ -21,7 +22,7 @@ process MINIMAP2_ALIGN {
     //tuple val(meta), path("*.paf")                       , optional: true, emit: paf
     tuple val(meta), path("*.sam")                         , emit: sam
     tuple val(meta), path("*.sort.bam")                    , emit: sort_bam
-    //tuple val(meta), path("*.bam.${bam_index_extension}"), optional: true, emit: index
+    tuple val(meta), path("*.bam.pbi"), optional: true, emit: index
     path "versions.yml"                                  , emit: versions
 
     when:
@@ -45,6 +46,7 @@ process MINIMAP2_ALIGN {
 
     samtools view -bS ${prefix}.sam|samtools sort > ${prefix}.sort.bam
 
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         minimap2: \$(minimap2 --version 2>&1)
@@ -66,3 +68,4 @@ process MINIMAP2_ALIGN {
     END_VERSIONS
     """
 }
+

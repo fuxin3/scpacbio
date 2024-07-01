@@ -1,3 +1,30 @@
+process SAMTOOLS_BC {
+    tag "$meta.id"
+    label 'process_high'
+
+    // Note: the versions here need to match the versions used in the mulled container below and minimap2/index
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:3161f532a5ea6f1dec9be5667c9efc2afdac6104-0' :
+        'biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:3161f532a5ea6f1dec9be5667c9efc2afdac6104-0' }"
+    
+    input:
+    tuple val(meta), path(bam)
+
+    output:
+    tuple val(meta),path('*.sorted.bam'),       emit:sort_bam
+
+    script:
+    def args  = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    """
+    $args
+    samtools sort \\
+    ${bam} \\
+    -o ${prefix}.sorted.bam \\
+    """
+}
+
 process ISOSEQ3_DEDUP {
     tag "$meta.id"
     label 'process_single'
@@ -27,7 +54,7 @@ process ISOSEQ3_DEDUP {
 
     """
     isoseq3 \\
-        dedup \\
+        groupdedup \\
         -j $task.cpus \\
         $bam \\
         ${prefix}.dedup.bam \\
