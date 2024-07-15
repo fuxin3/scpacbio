@@ -18,7 +18,7 @@ process PBINDEX {
     //val cigar_bam
 
     output:
-    //tuple val(meta), path("*.paf")                       , optional: true, emit: paf
+    tuple val(meta), path("*.bam")                       , emit: index_bam
     tuple val(meta), path("*.bam.pbi")                   , emit: index
     path "versions.yml"                                  , emit: versions
 
@@ -34,8 +34,8 @@ process PBINDEX {
     //def cigar_paf = cigar_paf_format && !bam_format ? "-c" : ''
    // def set_cigar_bam = cigar_bam && bam_format ? "-L" : ''
     """
-    
-    pbindex ${bam}
+    cat ${bam} > ${prefix}.index.bam
+    pbindex ${prefix}.index.bam
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

@@ -26,7 +26,7 @@ include { PBMM2                    } from '../modules/nf-core/pbmm2/main'
 //include { MINIMAP2_ALIGN           } from '../modules/nf-core/minimap2/main'
 include { ISOSEQ3_COLLAPSE         } from '../modules/nf-core/isoseq3/collapse/main'
 include { PIGEON_SORT              } from '../modules/nf-core/pigeon/main'
-//include { PBINDEX                  } from '../modules/nf-core/pbindex/main'
+include { PBINDEX                  } from '../modules/nf-core/pbindex/main'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -166,6 +166,10 @@ workflow SCPACBIO {
     //
     // MODULE: COLLAPSE_ISOFORM
     //
+    //PBINDEX(
+    //    SAMTOOLS_BC.out.sort_bam
+    //)
+
     ISOSEQ3_COLLAPSE(
         PBMM2.out.map_bam
     )

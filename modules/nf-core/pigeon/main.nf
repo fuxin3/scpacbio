@@ -21,6 +21,6 @@ process PIGEON_SORT {
     """
     pigeon sort \\
     ${gff} \\
-    -o ${prefix}.collapse.sorted.gff
+    -o collapse.sorted.gff
     """
 }
