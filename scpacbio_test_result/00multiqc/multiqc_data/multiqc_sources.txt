@@ -1,0 +1,2 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	SAMPLE	/workspaces/scpacbio/work/74/3558a99a0ffd3dc9c28745767e42b5/3/SAMPLE_fastqc.zip
